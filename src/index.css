@@ -1,0 +1,91 @@
+/*basic*/
+header {
+  display: block;
+  height: 10%;
+  background-color: black;
+  font: 400% Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+#main {
+  max-width: 960px;
+  margin: 0 auto;
+}
+/*
+body {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+*/
+.button-holder {
+  display: block;
+  height: 10%;
+
+  text-align: right;
+}
+.button {
+  cursor: pointer;
+  height: 50%;
+  line-height: 50%;
+  display: inline-block;
+  background-color: black;
+  font: 200% Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  margin: 15px;
+  padding: 0 5%;
+  border-radius: 5px;
+}
+
+.card {
+  font-style: italic;
+  padding: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: left;
+  overflow-wrap: break-word;
+  float: left;
+  width: 40%;
+  height: 15em;
+  margin-left: 6.5%;
+  margin-top: 2%;
+  border: 1px solid gray;
+  line-height: 1.5em;
+}
+.card strong {
+  font-weight: bold;
+  font-style: normal;
+}
+
+.forma {
+  position: relative;
+  /*display: none;*/
+  top: 500px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: auto;
+  background: red;
+  border: 2px solid black;
+}
+.forma:hover {
+  transform: translateY(100%);
+  transition-duration: 2s;
+}
+.hidden {
+  display: none;
+}
+/* small*/
+
+@media screen and (max-width: 640px) {
+  .button {
+    display: block;
+  }
+  .card {
+    display: block;
+    float: none;
+    width: auto;
+    margin: 1% 0;
+  }
+}
