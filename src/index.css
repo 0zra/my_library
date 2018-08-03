@@ -60,7 +60,7 @@ body {
 .forma {
   position: relative;
   /*display: none;*/
-  top: 500px;
+  top: -500px;
   margin: 0 auto;
   width: 100%;
   max-width: 600px;
@@ -69,13 +69,11 @@ body {
   background: red;
   border: 2px solid black;
 }
-.forma:hover {
-  transform: translateY(100%);
-  transition-duration: 2s;
+.transition {
+  transform: translateY(1000px);
+  transition-duration: 1s;
 }
-.hidden {
-  display: none;
-}
+
 /* small*/
 
 @media screen and (max-width: 640px) {

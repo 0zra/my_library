@@ -28,7 +28,9 @@ class Button extends React.Component {
   render() {
     return (
       <div className="button-holder">
-        <span className="button">Add book</span>{" "}
+        <span className="button" onClick={() => this.props.onClick()}>
+          Add book
+        </span>{" "}
       </div>
     );
   }
@@ -68,19 +70,36 @@ function Card(props) {
 }
 
 class Library extends React.Component {
-  renderForm() {
-    return <Forma />;
+  constructor(props) {
+    super(props);
+    this.state = { button: false };
   }
+  /*javi da je botun kliknut*/
+  handleClick() {
+    this.setState({ button: !this.state.button });
+  }
+
+  renderForm(f) {
+    if (f) {
+      let forma = document.querySelector("form");
+
+      forma.classList.add("transition");
+    }
+  }
+  transitionForm() {}
+
   render() {
     return (
       <div>
         <header>My Library</header>
         <div id="main">
-          <Button /*onClick={() => this.renderForm()}*/ />
+          <Button onClick={() => this.handleClick()} />
           {books.map(book => {
             return <Card value={book} />;
           })}
         </div>
+        <Forma />;
+        {this.renderForm(this.state.button)}
       </div>
     );
   }
