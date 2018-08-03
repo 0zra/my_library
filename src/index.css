@@ -12,11 +12,11 @@ header {
   max-width: 960px;
   margin: 0 auto;
 }
-/*
-body {
+
+.gray {
   background-color: rgba(0, 0, 0, 0.75);
 }
-*/
+
 .button-holder {
   display: block;
   height: 10%;
@@ -56,22 +56,28 @@ body {
   font-weight: bold;
   font-style: normal;
 }
-
+/*form style*/
 .forma {
-  position: relative;
-  /*display: none;*/
-  top: -500px;
-  margin: 0 auto;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: -600px;
   width: 100%;
   max-width: 600px;
   height: 300px;
-  margin: auto;
-  background: red;
+  background-color: gray;
   border: 2px solid black;
 }
 .transition {
-  transform: translateY(1000px);
-  transition-duration: 1s;
+  transform: translateY(700px);
+  transition-duration: 2s;
+}
+h2 {
+  font: 200% Arial, Helvetica, sans-serif;
+
+  text-align: center;
 }
 
 /* small*/

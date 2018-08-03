@@ -29,7 +29,7 @@ class Button extends React.Component {
     return (
       <div className="button-holder">
         <span className="button" onClick={() => this.props.onClick()}>
-          Add book
+          {/*this.props.onClick() === pass control to parent*/} Add book
         </span>{" "}
       </div>
     );
@@ -44,7 +44,12 @@ class Forma extends React.Component {
     };
   }
   render() {
-    return <form className="forma" />;
+    return (
+      <form className="forma">
+        <h2>Insert new book</h2>
+        <input type="text" />
+      </form>
+    );
   }
 }
 
@@ -72,7 +77,16 @@ function Card(props) {
 class Library extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { button: false };
+    this.renderForm = this.renderForm.bind(this);
+    this.state = {
+      button: false,
+      newBook: {
+        title: "",
+        author: "",
+        pages: null,
+        read: false
+      }
+    };
   }
   /*javi da je botun kliknut*/
   handleClick() {
@@ -82,23 +96,24 @@ class Library extends React.Component {
   renderForm(f) {
     if (f) {
       let forma = document.querySelector("form");
-
       forma.classList.add("transition");
     }
   }
-  transitionForm() {}
 
   render() {
     return (
       <div>
-        <header>My Library</header>
+        <Forma />
+        <header>
+          <h1>My Library</h1>
+        </header>
         <div id="main">
-          <Button onClick={() => this.handleClick()} />
+          <Button onClick={() => this.handleClick()} />{" "}
+          {/*take control from the child*/}
           {books.map(book => {
             return <Card value={book} />;
           })}
         </div>
-        <Forma />;
         {this.renderForm(this.state.button)}
       </div>
     );
