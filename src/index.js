@@ -3,6 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 /*==============================================*/
+const exit = () => {
+  let inputs = document.querySelectorAll("input");
+  inputs.forEach(input => (input.value = null));
+  let forma = document.querySelector(".transition");
+  forma.classList.remove("transition");
+};
 const books = [
   {
     title: "The Fellowship of the Ring",
@@ -41,6 +47,7 @@ class Forma extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(e) {
     if (e.target.name === "title") {
       this.props.onTitleChange(e.target.value);
@@ -59,6 +66,9 @@ class Forma extends React.Component {
     return (
       <form className="forma">
         <h2>Insert new book</h2>
+        <div className="exit" onClick={() => exit()}>
+          X
+        </div>
         <label>
           Title: <br />
           <input name="title" type="text" onChange={this.handleChange} />
@@ -90,7 +100,10 @@ class Forma extends React.Component {
 function Card(props) {
   return (
     <div className="card">
-      <strong>Book:</strong>
+      <div className="exit" onClick={() => props.onClick()}>
+        X
+      </div>
+      <strong>Title:</strong>
       <br />
       {props.value.title}
       <br />
@@ -125,6 +138,12 @@ class Library extends React.Component {
     this.handlePagesChange = this.handlePagesChange.bind(this);
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+  handleRemove(book) {
+    let newLibrary = this.state.library;
+    newLibrary.splice(newLibrary.indexOf(book), 1);
+    this.setState({ library: newLibrary });
   }
   handleSubmit() {
     let newBook = {
@@ -136,9 +155,7 @@ class Library extends React.Component {
 
     const helper = this.state.library.slice().concat([newBook]);
     this.setState({ library: helper });
-    let forma = document.querySelector(".transition");
-
-    forma.classList.remove("transition");
+    exit();
 
     /*TU RADIMO*/
   }
@@ -154,6 +171,7 @@ class Library extends React.Component {
   handleTitleChange(value) {
     this.setState({ title: value });
   }
+
   /*javi da je botun kliknut*/
   handleClick() {
     this.setState({ button: !this.state.button });
@@ -170,7 +188,7 @@ class Library extends React.Component {
   render() {
     const kartice = this.state.library;
     const ispis = kartice.map(book => {
-      return <Card value={book} />;
+      return <Card value={book} onClick={() => this.handleRemove(book)} />;
     });
     return (
       <div>
