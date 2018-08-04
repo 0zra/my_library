@@ -116,7 +116,12 @@ function Card(props) {
       {props.value.pages}
       <br />
       <strong>Status:</strong>
-      {props.value.status ? "Read" : "Not yet"}
+      <img
+        src={require(props.value.status ? "./y.jpg" : "./n.jpg")}
+        width="40"
+        height="40"
+        onClick={() => props.readStatus()}
+      />
     </div>
   );
 }
@@ -188,7 +193,19 @@ class Library extends React.Component {
   render() {
     const kartice = this.state.library;
     const ispis = kartice.map(book => {
-      return <Card value={book} onClick={() => this.handleRemove(book)} />;
+      return (
+        <Card
+          value={book}
+          onClick={() => this.handleRemove(book)}
+          readStatus={() => {
+            const newBook = { ...book };
+            newBook.status = !book.status;
+            const newLibrary = this.state.library.slice();
+            newLibrary[newLibrary.indexOf(book)] = newBook;
+            this.setState({ library: newLibrary });
+          }}
+        />
+      );
     });
     return (
       <div>

@@ -57,6 +57,11 @@ html {
   font-weight: bold;
   font-style: normal;
 }
+.card img {
+  cursor: pointer;
+  position: relative;
+  top: 15px;
+}
 
 .exit {
   cursor: pointer;
