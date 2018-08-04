@@ -3,12 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 /*==============================================*/
-const exit = () => {
-  let inputs = document.querySelectorAll("input");
-  inputs.forEach(input => (input.value = null));
-  let forma = document.querySelector(".transition");
-  forma.classList.remove("transition");
-};
 const books = [
   {
     title: "The Fellowship of the Ring",
@@ -29,6 +23,14 @@ const books = [
     status: false
   }
 ];
+
+/*JSON.parse(localStorage["library"]);*/
+const exit = () => {
+  let inputs = document.querySelectorAll("input");
+  inputs.forEach(input => (input.value = null));
+  let forma = document.querySelector(".transition");
+  forma.classList.remove("transition");
+};
 
 class Button extends React.Component {
   render() {
@@ -131,7 +133,9 @@ class Library extends React.Component {
     super(props);
     this.state = {
       button: false,
-      library: books.slice(),
+      library: JSON.parse(localStorage["library"])
+        ? JSON.parse(localStorage["library"])
+        : books.slice(),
       title: "",
       author: "",
       pages: null,
@@ -148,6 +152,7 @@ class Library extends React.Component {
   handleRemove(book) {
     let newLibrary = this.state.library;
     newLibrary.splice(newLibrary.indexOf(book), 1);
+    localStorage.setItem("library", JSON.stringify(newLibrary));
     this.setState({ library: newLibrary });
   }
   handleSubmit() {
@@ -159,6 +164,7 @@ class Library extends React.Component {
     };
 
     const helper = this.state.library.slice().concat([newBook]);
+    localStorage.setItem("library", JSON.stringify(helper));
     this.setState({ library: helper });
     exit();
 
