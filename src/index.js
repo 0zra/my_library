@@ -120,6 +120,7 @@ function Card(props) {
       <strong>Status:</strong>
       <img
         src={require(props.value.status ? "./y.jpg" : "./n.jpg")}
+        alt={props.value.status ? "Read" : "Not yet"}
         width="40"
         height="40"
         onClick={() => props.readStatus()}
@@ -162,6 +163,14 @@ class Library extends React.Component {
       pages: this.state.pages,
       status: this.state.read
     };
+    if (
+      newBook.title === "" ||
+      newBook.author === "" ||
+      newBook.pages === null
+    ) {
+      alert("Missing input");
+      return;
+    }
 
     const helper = this.state.library.slice().concat([newBook]);
     localStorage.setItem("library", JSON.stringify(helper));
